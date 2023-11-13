@@ -35,4 +35,16 @@ public class InputValidator {
         System.out.println(parsedInput);
         return parsedInput;
     }
+
+    public List<String> validateInputInMenu(List<String> menuInfo,
+                                            List<String> parsedInputMenu) throws IllegalArgumentException {
+        for (int inputIndex = 0; inputIndex < parsedInputMenu.size(); inputIndex += 2) {
+            if (menuInfo.contains(parsedInputMenu.get(inputIndex))) {
+                continue;
+            }
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+        return parsedInputMenu;
+    }
+
 }
