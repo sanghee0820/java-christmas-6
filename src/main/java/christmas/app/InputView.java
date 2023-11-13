@@ -14,4 +14,13 @@ public class InputView {
         dayInput = Console.readLine();
         return dayInput;
     }
+
+    public String enterMenu() {
+        String menuInput;
+
+        System.out.println("주문하실 메뉴를 메뉴와 개수를 알려주세요 (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
+
+        menuInput = Console.readLine();
+        return menuInput;
+    }
 }
