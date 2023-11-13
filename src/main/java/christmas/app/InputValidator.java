@@ -37,14 +37,15 @@ public class InputValidator {
     }
 
     public List<String> validateInputInMenu(List<String> menuInfo,
-                                            List<String> parsedInputMenu) throws IllegalArgumentException {
-        for (int inputIndex = 0; inputIndex < parsedInputMenu.size(); inputIndex += 2) {
-            if (menuInfo.contains(parsedInputMenu.get(inputIndex))) {
+                                            List<List<String>> parsedInput) throws IllegalArgumentException {
+        List<String> parsedMenu = parsedInput.get(0);
+        for (int inputIndex = 0; inputIndex < parsedMenu.size(); inputIndex += 2) {
+            if (menuInfo.contains(parsedMenu.get(inputIndex))) {
                 continue;
             }
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
-        return parsedInputMenu;
+        return parsedMenu;
     }
 
 
