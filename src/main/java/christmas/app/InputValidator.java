@@ -39,7 +39,7 @@ public class InputValidator {
     public List<String> validateInputInMenu(List<String> menuInfo,
                                             List<List<String>> parsedInput) throws IllegalArgumentException {
         List<String> parsedMenu = parsedInput.get(0);
-        for (int inputIndex = 0; inputIndex < parsedMenu.size(); inputIndex += 2) {
+        for (int inputIndex = 0; inputIndex < parsedMenu.size(); inputIndex++) {
             if (menuInfo.contains(parsedMenu.get(inputIndex))) {
                 continue;
             }
