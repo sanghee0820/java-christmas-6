@@ -31,7 +31,7 @@ public class InputValidator {
                 throw new IllegalArgumentException("[Error] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
             parsedMenu.add(parts[0]);
-            parsedNumber.add(parts[1]);
+            parsedQuantity.add(parts[1]);
         }
         return List.of(parsedMenu, parsedQuantity);
     }
