@@ -1,5 +1,8 @@
 package christmas.app;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InputValidator {
 
     public int validateSingleNumber(String inputValue) throws IllegalArgumentException {
@@ -15,5 +18,21 @@ public class InputValidator {
             throw new IllegalArgumentException("[Error] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
         return day;
+    }
+
+    public List<String> validateMenuMatchWithForm(String menuInput) throws IllegalArgumentException {
+        menuInput = menuInput.replaceAll(" ", "");
+        List<String> parsedWithBar = List.of(menuInput.split(","));
+        List<String> parsedInput = new ArrayList<>();
+        for (String data : parsedWithBar) {
+            String[] parts = data.split("-");
+            if (parts.length != 2) {
+                throw new IllegalArgumentException("[Error] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }
+            parsedInput.add(parts[0]);
+            parsedInput.add(parts[1]);
+        }
+        System.out.println(parsedInput);
+        return parsedInput;
     }
 }
