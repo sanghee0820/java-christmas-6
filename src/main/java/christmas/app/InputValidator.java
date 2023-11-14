@@ -49,15 +49,19 @@ public class InputValidator {
         return parsedMenu;
     }
 
-    public List<Integer> validateQuantityIsInteger(List<List<String>> parsedInput) throws IllegalArgumentException {
-        List<String> parsedQuantity = parsedInput.get(1);
+    public List<Integer> validateQuantityMatchWithForm(List<String> inputQuantity) throws IllegalArgumentException {
         List<Integer> menuQuantity = new ArrayList<>();
-        for (String s : parsedQuantity) {
+        for (String s : inputQuantity) {
+            int quantity;
             try {
-                menuQuantity.add(Integer.parseInt(s));
+                quantity = Integer.parseInt(s);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
+            if (quantity < 0) {
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }
+            menuQuantity.add(quantity);
         }
         return menuQuantity;
     }
