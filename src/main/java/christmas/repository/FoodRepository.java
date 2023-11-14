@@ -24,7 +24,4 @@ public class FoodRepository {
         return food.keySet().stream().toList();
     }
 
-//    public List<Food> getAllFood(){
-//        return food;
-//    }
 }
