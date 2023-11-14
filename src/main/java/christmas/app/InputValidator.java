@@ -1,6 +1,7 @@
 package christmas.app;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class InputValidator {
@@ -39,8 +40,8 @@ public class InputValidator {
     public List<String> validateInputInMenu(List<String> menuInfo,
                                             List<List<String>> parsedInput) throws IllegalArgumentException {
         List<String> parsedMenu = parsedInput.get(0);
-        for (int inputIndex = 0; inputIndex < parsedMenu.size(); inputIndex++) {
-            if (menuInfo.contains(parsedMenu.get(inputIndex))) {
+        for (String menu : parsedMenu) {
+            if (menuInfo.contains(menu)) {
                 continue;
             }
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
@@ -51,13 +52,25 @@ public class InputValidator {
     public List<Integer> validateQuantityIsInteger(List<List<String>> parsedInput) throws IllegalArgumentException {
         List<String> parsedQuantity = parsedInput.get(1);
         List<Integer> menuQuantity = new ArrayList<>();
-        for (int inputIndex = 0; inputIndex < parsedQuantity.size(); inputIndex++) {
+        for (String s : parsedQuantity) {
             try {
-                menuQuantity.add(Integer.parseInt(parsedQuantity.get(inputIndex)));
+                menuQuantity.add(Integer.parseInt(s));
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
         return menuQuantity;
+    }
+
+    public HashMap<String, Integer> validateUniqueMenu(List<String> menu, List<Integer> quantity) {
+        HashMap<String, Integer> menuInfo = new HashMap<>();
+        for (int index = 0; index < menu.size(); index++) {
+            if (menuInfo.containsKey(menu.get(index))) {
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }
+            menuInfo.put(menu.get(index), quantity.get(index));
+        }
+
+        return menuInfo;
     }
 }
