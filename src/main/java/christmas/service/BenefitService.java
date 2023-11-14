@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class BenefitService {
-    public void getBenefitInfo(Day dayInfo, List<Order> orderInfo) {
+    public List<Benefit> getBenefitInfo(Day dayInfo, List<Order> orderInfo) {
         int totalPrice = 0;
         List<Benefit> benefitInfo = new ArrayList<>();
         HashMap<String, Integer> typeInfo = setBaseTypeInfo();
@@ -22,11 +22,11 @@ public class BenefitService {
         }
         System.out.println(typeInfo);
         if (totalPrice < 10000) {
-            return;
+            return benefitInfo;
         }
         Optional.of(getDayBenefit(dayInfo, typeInfo)).ifPresent(benefitInfo::addAll);
         Optional.ofNullable(getPriceBenefit(totalPrice)).ifPresent(benefitInfo::add);
-        System.out.println(benefitInfo);
+        return benefitInfo;
     }
 
     private HashMap<String, Integer> setBaseTypeInfo() {
