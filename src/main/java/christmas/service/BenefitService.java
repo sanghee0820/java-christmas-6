@@ -3,6 +3,7 @@ package christmas.service;
 import christmas.domain.Benefit;
 import christmas.domain.Day;
 import christmas.domain.Order;
+import christmas.enumType.Badge;
 import christmas.enumType.Discount;
 import christmas.enumType.Star;
 import christmas.enumType.Week;
@@ -27,6 +28,23 @@ public class BenefitService {
         Optional.of(getDayBenefit(dayInfo, typeInfo)).ifPresent(benefitInfo::addAll);
         Optional.ofNullable(getPriceBenefit(totalPrice)).ifPresent(benefitInfo::add);
         return benefitInfo;
+    }
+
+    public Badge getBadge(List<Order> orderInfo) {
+        int totalPrice = 0;
+        for (Order order : orderInfo) {
+            totalPrice += order.getQuantity() * order.getFood().getPrice();
+        }
+        if (totalPrice < 5000) {
+            return Badge.NONE;
+        }
+        if (totalPrice < 10000) {
+            return Badge.STAR;
+        }
+        if (totalPrice < 20000) {
+            return Badge.TREE;
+        }
+        return Badge.SANTA;
     }
 
     private HashMap<String, Integer> setBaseTypeInfo() {
@@ -65,9 +83,9 @@ public class BenefitService {
     private Benefit getWeekBenefit(Day dayInfo, HashMap<String, Integer> typeInfo) {
         Week week = dayInfo.getWeek();
         if (week.equals(Week.WEEKEND)) {
-            return new Benefit(Discount.WEEKEND, typeInfo.get("Main") * 2023);
+            return new Benefit(Discount.WEEKEND, typeInfo.get("Main") * week.getMainDiscount());
         }
-        return new Benefit(Discount.WEEDAY, typeInfo.get("Desert") * 2023);
+        return new Benefit(Discount.WEEDAY, typeInfo.get("Desert") * week.getDesertDiscount());
     }
 
     private Benefit getPriceBenefit(int totalPrice) {
