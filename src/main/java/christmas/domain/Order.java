@@ -9,6 +9,14 @@ public class Order {
         this.quantity = quantity;
     }
 
+    public Food getFood() {
+        return food;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
