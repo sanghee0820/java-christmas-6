@@ -18,7 +18,7 @@ public class BenefitService {
         HashMap<String, Integer> typeInfo = setBaseTypeInfo();
         for (Order order : orderInfo) {
             totalPrice += order.getQuantity() * order.getFood().getPrice();
-            typeInfo.compute(order.getFood().getType(), (key, value) -> value + 1);
+            typeInfo.compute(order.getFood().getType(), (key, value) -> value + order.getQuantity());
         }
         System.out.println(typeInfo);
         if (totalPrice < 10000) {
