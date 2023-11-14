@@ -10,4 +10,12 @@ public class Benefit {
         this.discountType = discountType;
         this.discountPrice = discountPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Benefit{" +
+                "discountType=" + discountType +
+                ", discountPrice=" + discountPrice +
+                '}';
+    }
 }
