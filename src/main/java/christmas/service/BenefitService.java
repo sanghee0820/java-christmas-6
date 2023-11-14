@@ -3,9 +3,13 @@ package christmas.service;
 import christmas.domain.Benefit;
 import christmas.domain.Day;
 import christmas.domain.Order;
+import christmas.enumType.Discount;
+import christmas.enumType.Star;
+import christmas.enumType.Week;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class BenefitService {
     public void getBenefitInfo(Day dayInfo, List<Order> orderInfo) {
@@ -16,7 +20,11 @@ public class BenefitService {
             totalPrice += order.getQuantity() * order.getFood().getPrice();
             typeInfo.compute(order.getFood().getType(), (key, value) -> value + 1);
         }
-        System.out.println(typeInfo);
+        if (totalPrice < 10000) {
+            return;
+        }
+        benefitInfo.addAll(getDayBenefit(dayInfo, typeInfo));
+
     }
 
     private HashMap<String, Integer> setBaseTypeInfo() {
@@ -28,5 +36,36 @@ public class BenefitService {
         return typeInfo;
     }
 
+    private List<Benefit> getDayBenefit(Day dayInfo, HashMap<String, Integer> typeInfo) {
+        List<Benefit> benefits = new ArrayList<>();
+        Optional.ofNullable(getDDayBenefit(dayInfo)).ifPresent(benefits::add);
+        Optional.of(getWeekBenefit(dayInfo, typeInfo)).ifPresent(benefits::add);
+        Optional.ofNullable(getStarBenefit(dayInfo)).ifPresent(benefits::add);
+        return benefits;
+    }
+
+    private Benefit getDDayBenefit(Day dayInfo) {
+        int day = dayInfo.getDay();
+        if (day > 25) {
+            return null;
+        }
+        return new Benefit(Discount.DDAY, (day - 1) * 100 + 1000);
+    }
+
+    private Benefit getStarBenefit(Day dayInfo) {
+        Star star = dayInfo.getStar();
+        if (star.equals(Star.NONE_STAR)) {
+            return null;
+        }
+        return new Benefit(Discount.SPECIAL, 1000);
+    }
+
+    private Benefit getWeekBenefit(Day dayInfo, HashMap<String, Integer> typeInfo) {
+        Week week = dayInfo.getWeek();
+        if (week.equals(Week.WEEKEND)) {
+            return new Benefit(Discount.WEEKEND, typeInfo.get("Main") * 2023);
+        }
+        return new Benefit(Discount.WEEDAY, typeInfo.get("Desert") * 2023);
+    }
 
 }
