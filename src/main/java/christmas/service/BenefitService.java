@@ -20,11 +20,13 @@ public class BenefitService {
             totalPrice += order.getQuantity() * order.getFood().getPrice();
             typeInfo.compute(order.getFood().getType(), (key, value) -> value + 1);
         }
+        System.out.println(typeInfo);
         if (totalPrice < 10000) {
             return;
         }
-        benefitInfo.addAll(getDayBenefit(dayInfo, typeInfo));
-
+        Optional.of(getDayBenefit(dayInfo, typeInfo)).ifPresent(benefitInfo::addAll);
+        Optional.ofNullable(getPriceBenefit(totalPrice)).ifPresent(benefitInfo::add);
+        System.out.println(benefitInfo);
     }
 
     private HashMap<String, Integer> setBaseTypeInfo() {
@@ -66,6 +68,13 @@ public class BenefitService {
             return new Benefit(Discount.WEEKEND, typeInfo.get("Main") * 2023);
         }
         return new Benefit(Discount.WEEDAY, typeInfo.get("Desert") * 2023);
+    }
+
+    private Benefit getPriceBenefit(int totalPrice) {
+        if (totalPrice < 100000) {
+            return null;
+        }
+        return new Benefit(Discount.GIFT, 25000);
     }
 
 }
