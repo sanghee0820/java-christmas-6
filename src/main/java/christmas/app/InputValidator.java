@@ -73,7 +73,16 @@ public class InputValidator {
             }
             menuInfo.put(menu.get(index), quantity.get(index));
         }
-
         return menuInfo;
+    }
+
+    public void validateTotalQuantity(List<Integer> menuQuantity) throws IllegalArgumentException {
+        int total = 0;
+        for (int quantity : menuQuantity) {
+            total += quantity;
+            if (total > 20) {
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }
+        }
     }
 }
