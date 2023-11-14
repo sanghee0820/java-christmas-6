@@ -1,6 +1,9 @@
 package christmas.service;
 
+import christmas.domain.Order;
 import christmas.repository.FoodRepository;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FoodService {
@@ -12,5 +15,18 @@ public class FoodService {
 
     public List<String> getAllFoodName() {
         return foodRepository.getAllFoodName();
+    }
+
+    public List<Order> setOrderInfo(HashMap<String, Integer> orders) {
+        List<Order> orderInfo = new ArrayList<>();
+        for (String foodName : orders.keySet()) {
+            orderInfo.add(
+                    new Order(
+                            foodRepository.findByName(foodName),
+                            orders.get(foodName)
+                    )
+            );
+        }
+        return orderInfo;
     }
 }
