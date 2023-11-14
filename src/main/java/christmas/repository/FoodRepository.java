@@ -24,4 +24,7 @@ public class FoodRepository {
         return food.keySet().stream().toList();
     }
 
+    public Food findByName(String foodName) {
+        return food.get(foodName);
+    }
 }
