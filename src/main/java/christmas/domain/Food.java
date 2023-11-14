@@ -22,4 +22,13 @@ public class Food {
     public String getType() {
         return Type;
     }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", Type='" + Type + '\'' +
+                '}';
+    }
 }

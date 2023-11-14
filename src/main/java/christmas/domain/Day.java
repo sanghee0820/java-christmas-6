@@ -13,4 +13,25 @@ public class Day {
         this.star = star;
         this.week = week;
     }
+
+    public int getDay() {
+        return day;
+    }
+
+    public Star getStar() {
+        return star;
+    }
+
+    public Week getWeek() {
+        return week;
+    }
+
+    @Override
+    public String toString() {
+        return "Day{" +
+                "day=" + day +
+                ", star=" + star +
+                ", week=" + week +
+                '}';
+    }
 }
