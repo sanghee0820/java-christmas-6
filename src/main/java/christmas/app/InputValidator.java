@@ -38,8 +38,7 @@ public class InputValidator {
     }
 
     public List<String> validateInputInMenu(List<String> menuInfo,
-                                            List<List<String>> parsedInput) throws IllegalArgumentException {
-        List<String> parsedMenu = parsedInput.get(0);
+                                            List<String> parsedMenu) throws IllegalArgumentException {
         for (String menu : parsedMenu) {
             if (menuInfo.contains(menu)) {
                 continue;
@@ -49,9 +48,9 @@ public class InputValidator {
         return parsedMenu;
     }
 
-    public List<Integer> validateQuantityMatchWithForm(List<String> inputQuantity) throws IllegalArgumentException {
+    public List<Integer> validateQuantityMatchWithForm(List<String> parsedQuantity) throws IllegalArgumentException {
         List<Integer> menuQuantity = new ArrayList<>();
-        for (String s : inputQuantity) {
+        for (String s : parsedQuantity) {
             int quantity;
             try {
                 quantity = Integer.parseInt(s);
