@@ -8,7 +8,7 @@ import christmas.repository.DayRepository;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class dayRepositoryTest {
+public class DayRepositoryTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30})
