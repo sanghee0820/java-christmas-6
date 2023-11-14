@@ -16,10 +16,7 @@ public class AppConsole {
         this.outputView = new OutputView();
         this.inputValidator = new InputValidator();
         this.christmasController = new ChristmasController();
-        menuInfo = List.of("양송이수프", "타파스", "시저샐러드",
-                "티본스테이크", "바비큐립", "해산물파스타", "크리스마스파스타",
-                "초코케이크", "아이스크림",
-                "제로콜라", "레드와인", "샴페인");  // 서버에서 가져올 예정.
+        menuInfo = christmasController.getAllFood();// 서버에서 가져올 예정.
     }
 
     public int enterVisitDay() {
