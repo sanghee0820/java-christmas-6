@@ -11,6 +11,14 @@ public class Benefit {
         this.discountPrice = discountPrice;
     }
 
+    public Discount getDiscountType() {
+        return discountType;
+    }
+
+    public int getDiscountPrice() {
+        return discountPrice;
+    }
+
     @Override
     public String toString() {
         return "Benefit{" +
