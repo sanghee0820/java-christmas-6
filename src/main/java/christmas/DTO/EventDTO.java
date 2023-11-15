@@ -9,15 +9,22 @@ import java.util.List;
 public class EventDTO {
     int totalPrice;
     int visitDay;
+    boolean gifted;
     HashMap<String, Integer> orderInfo;
     HashMap<String, Integer> benefitInfo;
     String badge;
+
     public EventDTO(Event christmasEvent) {
         this.orderInfo = orderInfoToDTO(christmasEvent.getOrderInfo());
         this.totalPrice = getTotalPrice(christmasEvent.getOrderInfo());
         this.visitDay = christmasEvent.getVisitDay();
         this.benefitInfo = benefitInfoToDTO(christmasEvent.getBenefitInfo());
+        this.gifted = checkGift();
         this.badge = christmasEvent.getBadge().getDesc();
+    }
+
+    public boolean isGifted() {
+        return gifted;
     }
 
     public int getVisitDay() {
@@ -62,6 +69,10 @@ public class EventDTO {
             benefitDTO.put(benefit.getDiscountType().getDesc(), benefit.getDiscountPrice());
         }
         return benefitDTO;
+    }
+
+    private boolean checkGift() {
+        return this.benefitInfo.containsKey("증정 이벤트");
     }
 
     @Override

@@ -11,7 +11,7 @@ public class OutputView {
         System.out.println(orderResult(eventInfo.getOrderInfo()));
         System.out.println(totalPriceResult(eventInfo.getTotalPrice()));
         System.out.println(giftResult(eventInfo.getBenefitInfo()));
-        System.out.println(benefitResult(eventInfo.getBenefitInfo(), eventInfo.getTotalPrice()));
+        System.out.println(benefitResult(eventInfo.getBenefitInfo(), eventInfo.getTotalPrice(), eventInfo.isGifted()));
         System.out.println(badgeResult(eventInfo.getBadge()));
     }
 
@@ -43,33 +43,36 @@ public class OutputView {
         return gift.toString();
     }
 
-    private String benefitResult(HashMap<String, Integer> benefitInfo, int totalPrice) {
+    private String benefitResult(HashMap<String, Integer> benefitInfo, int totalPrice, boolean isGifted) {
         int totalBenefit = 0;
         StringBuilder gift = new StringBuilder("<혜택 내역>\n");
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
         if (benefitInfo.isEmpty()) {
-            gift.append("없음\n\n").append(priceBenefitResult(totalPrice, totalBenefit));
+            gift.append("없음\n\n").append(priceBenefitResult(totalPrice, totalBenefit, isGifted));
             return gift.toString();
         }
         for (String key : benefitInfo.keySet()) {
             totalBenefit += benefitInfo.get(key);
             gift.append(key).append(": -").append(decimalFormat.format(benefitInfo.get(key))).append("원\n");
         }
-        gift.append("\n").append(priceBenefitResult(totalPrice, totalBenefit));
+        gift.append("\n").append(priceBenefitResult(totalPrice, totalBenefit, isGifted));
         return gift.toString();
     }
 
-    private String priceBenefitResult(int totalPrice, int totalBenefit) {
+    private String priceBenefitResult(int totalPrice, int totalBenefit, boolean isGifted) {
         StringBuilder priceBenefit = new StringBuilder("<총혜택 금액>\n");
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
+
         if (totalBenefit == 0) {
             priceBenefit.append("없음\n\n").append("<할인 후 예상 결제 금액>\n")
                     .append(decimalFormat.format(totalPrice - totalBenefit));
             return priceBenefit.toString();
         }
-        priceBenefit.append("-").append(decimalFormat.format(totalBenefit)).append("원\n\n")
-                .append("<할인 후 예상 결제 금액>\n")
-                .append(decimalFormat.format(totalPrice - totalBenefit)).append("\n");
+        priceBenefit.append("-").append(decimalFormat.format(totalBenefit)).append("원\n\n");
+        if (isGifted) {
+            totalBenefit -= 25000;
+        }
+        priceBenefit.append("<할인 후 예상 결제 금액>\n").append(decimalFormat.format(totalPrice - totalBenefit)).append("\n");
         return priceBenefit.toString();
     }
 
