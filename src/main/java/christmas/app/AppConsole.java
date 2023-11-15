@@ -1,5 +1,6 @@
 package christmas.app;
 
+import christmas.DTO.EventDTO;
 import christmas.controller.ChristmasController;
 import java.util.HashMap;
 import java.util.List;
@@ -48,8 +49,9 @@ public class AppConsole {
 
     public void run() {
         int day = enterVisitDay();
-        HashMap<String, Integer> order = enterMenu();
-        System.out.println(day);
-        System.out.println(order);
+        HashMap<String, Integer> orders = enterMenu();
+        EventDTO eventInfo = christmasController.getEventInfo(day, orders);
+        System.out.println(eventInfo);
+        outputView.showResult(eventInfo);
     }
 }
