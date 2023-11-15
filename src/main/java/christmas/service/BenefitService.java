@@ -42,7 +42,7 @@ public class BenefitService {
     private List<Benefit> getDayBenefit(Day dayInfo, HashMap<String, Integer> typeInfo) {
         List<Benefit> benefits = new ArrayList<>();
         Optional.ofNullable(getDDayBenefit(dayInfo)).ifPresent(benefits::add);
-        Optional.of(getWeekBenefit(dayInfo, typeInfo)).ifPresent(benefits::add);
+        Optional.ofNullable(getWeekBenefit(dayInfo, typeInfo)).ifPresent(benefits::add);
         Optional.ofNullable(getStarBenefit(dayInfo)).ifPresent(benefits::add);
         return benefits;
     }
@@ -66,9 +66,18 @@ public class BenefitService {
     private Benefit getWeekBenefit(Day dayInfo, HashMap<String, Integer> typeInfo) {
         Week week = dayInfo.getWeek();
         if (week.equals(Week.WEEKEND)) {
-            return new Benefit(Discount.WEEKEND, typeInfo.get("Main") * week.getMainDiscount());
+            int discountPrice = typeInfo.get("Main") * week.getMainDiscount();
+            if (discountPrice == 0) {
+                return null;
+            }
+            return new Benefit(Discount.WEEKEND, discountPrice);
         }
-        return new Benefit(Discount.WEEDAY, typeInfo.get("Desert") * week.getDesertDiscount());
+
+        int discountPrice = typeInfo.get("Desert") * week.getDesertDiscount();
+        if (discountPrice == 0) {
+            return null;
+        }
+        return new Benefit(Discount.WEEKEND, discountPrice);
     }
 
     private Benefit getPriceBenefit(int totalPrice) {
