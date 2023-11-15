@@ -10,13 +10,13 @@ public class InputValidator {
         try {
             return Integer.parseInt(inputValue);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[Error] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
     }
 
     public int validateDayInRange(int day) throws IllegalArgumentException {
         if (day < 1 || day > 31) {
-            throw new IllegalArgumentException("[Error] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
         return day;
     }
