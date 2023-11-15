@@ -23,7 +23,7 @@ public class ChristmasController {
         this.benefitService = new BenefitService();
     }
 
-    public List<String> getAllFood() {
+    public HashMap<String, String> getAllFood() {
         return foodService.getAllFoodName();
     }
 

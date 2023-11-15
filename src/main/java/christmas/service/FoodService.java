@@ -13,8 +13,8 @@ public class FoodService {
         this.foodRepository = new FoodRepository();
     }
 
-    public List<String> getAllFoodName() {
-        return foodRepository.getAllFoodName();
+    public HashMap<String, String> getAllFoodName() {
+        return foodRepository.getAllFoodNameType();
     }
 
     public List<Order> setOrderInfo(HashMap<String, Integer> orders) {

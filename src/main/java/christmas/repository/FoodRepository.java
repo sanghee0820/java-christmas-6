@@ -20,8 +20,12 @@ public class FoodRepository {
         }
     }
 
-    public List<String> getAllFoodName() {
-        return food.keySet().stream().toList();
+    public HashMap<String, String> getAllFoodNameType() {
+        HashMap<String, String> foods = new HashMap<>();
+        for (String name : food.keySet()) {
+            foods.put(name, food.get(name).getType());
+        }
+        return foods;
     }
 
     public Food findByName(String foodName) {

@@ -37,15 +37,26 @@ public class InputValidator {
         return List.of(parsedMenu, parsedQuantity);
     }
 
-    public List<String> validateInputInMenu(List<String> menuInfo,
+    public List<String> validateInputInMenu(HashMap<String, String> menuInfo,
                                             List<String> parsedMenu) throws IllegalArgumentException {
         for (String menu : parsedMenu) {
-            if (menuInfo.contains(menu)) {
+            if (menuInfo.containsKey(menu)) {
                 continue;
             }
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
         return parsedMenu;
+    }
+
+    public void validateOnlyBeverage(HashMap<String, String> menuInfo,
+                                     List<String> parsedMenu) throws IllegalArgumentException {
+        for (String menu : parsedMenu) {
+            if (menuInfo.get(menu).equals("Beverage")) {
+                continue;
+            }
+            return;
+        }
+        throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
 
     public List<Integer> validateQuantityMatchWithForm(List<String> parsedQuantity) throws IllegalArgumentException {

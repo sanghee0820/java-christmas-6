@@ -10,7 +10,7 @@ public class AppConsole {
     private final OutputView outputView;
     private final InputValidator inputValidator;
     private final ChristmasController christmasController;
-    private final List<String> menuInfo;
+    private final HashMap<String, String> menuInfo;
 
     public AppConsole() {
         this.inputView = new InputView();
