@@ -65,7 +65,7 @@ public class OutputView {
 
         if (totalBenefit == 0) {
             priceBenefit.append("없음\n\n").append("<할인 후 예상 결제 금액>\n")
-                    .append(decimalFormat.format(totalPrice - totalBenefit));
+                    .append(decimalFormat.format(totalPrice - totalBenefit)).append("\n");
             return priceBenefit.toString();
         }
         priceBenefit.append("-").append(decimalFormat.format(totalBenefit)).append("원\n\n");
