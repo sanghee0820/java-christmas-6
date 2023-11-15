@@ -29,22 +29,6 @@ public class BenefitService {
         return benefitInfo;
     }
 
-    public Badge getBadge(List<Order> orderInfo) {
-        int totalPrice = 0;
-        for (Order order : orderInfo) {
-            totalPrice += order.getQuantity() * order.getFood().getPrice();
-        }
-        if (totalPrice < 5000) {
-            return Badge.NONE;
-        }
-        if (totalPrice < 10000) {
-            return Badge.STAR;
-        }
-        if (totalPrice < 20000) {
-            return Badge.TREE;
-        }
-        return Badge.SANTA;
-    }
 
     private HashMap<String, Integer> setBaseTypeInfo() {
         HashMap<String, Integer> typeInfo = new HashMap<>();
@@ -94,4 +78,20 @@ public class BenefitService {
         return new Benefit(Discount.GIFT, 25000);
     }
 
+    public Badge getBadge(List<Benefit> benefitInfo) {
+        int totalPrice = 0;
+        for (Benefit benefit : benefitInfo) {
+            totalPrice += benefit.getDiscountPrice();
+        }
+        if (totalPrice < 5000) {
+            return Badge.NONE;
+        }
+        if (totalPrice < 10000) {
+            return Badge.STAR;
+        }
+        if (totalPrice < 20000) {
+            return Badge.TREE;
+        }
+        return Badge.SANTA;
+    }
 }

@@ -31,7 +31,7 @@ public class ChristmasController {
         Day dayInfo = dayService.getDayInfo(day);
         List<Order> orderInfo = foodService.setOrderInfo(orders);
         List<Benefit> benefitInfo = benefitService.getBenefitInfo(dayInfo, orderInfo);
-        Badge badgeInfo = benefitService.getBadge(orderInfo);
+        Badge badgeInfo = benefitService.getBadge(benefitInfo);
         Event christmasEvent = new Event(day, orderInfo, benefitInfo, badgeInfo);
         return new EventDTO(christmasEvent);
     }
