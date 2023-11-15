@@ -25,13 +25,4 @@ public class Day {
     public Week getWeek() {
         return week;
     }
-
-    @Override
-    public String toString() {
-        return "Day{" +
-                "day=" + day +
-                ", star=" + star +
-                ", week=" + week +
-                '}';
-    }
 }

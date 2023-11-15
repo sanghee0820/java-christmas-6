@@ -74,14 +74,4 @@ public class EventDTO {
     private boolean checkGift() {
         return this.benefitInfo.containsKey("증정 이벤트");
     }
-
-    @Override
-    public String toString() {
-        return "EventDTO{" +
-                "orderInfo=" + orderInfo +
-                ", totalPrice=" + totalPrice +
-                ", benefitInfo=" + benefitInfo +
-                ", badge='" + badge + '\'' +
-                '}';
-    }
 }

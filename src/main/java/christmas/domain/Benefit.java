@@ -18,12 +18,4 @@ public class Benefit {
     public int getDiscountPrice() {
         return discountPrice;
     }
-
-    @Override
-    public String toString() {
-        return "Benefit{" +
-                "discountType=" + discountType +
-                ", discountPrice=" + discountPrice +
-                '}';
-    }
 }

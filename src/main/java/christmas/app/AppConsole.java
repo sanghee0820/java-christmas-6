@@ -51,7 +51,6 @@ public class AppConsole {
         int day = enterVisitDay();
         HashMap<String, Integer> orders = enterMenu();
         EventDTO eventInfo = christmasController.getEventInfo(day, orders);
-        System.out.println(eventInfo);
         outputView.showResult(eventInfo);
     }
 }

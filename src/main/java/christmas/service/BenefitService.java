@@ -21,7 +21,6 @@ public class BenefitService {
             totalPrice += order.getQuantity() * order.getFood().getPrice();
             typeInfo.compute(order.getFood().getType(), (key, value) -> value + order.getQuantity());
         }
-        System.out.println(typeInfo);
         if (totalPrice < 10000) {
             return benefitInfo;
         }

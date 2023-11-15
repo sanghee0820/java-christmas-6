@@ -29,8 +29,6 @@ public class ChristmasController {
 
     public EventDTO getEventInfo(int day, HashMap<String, Integer> orders) {
         Day dayInfo = dayService.getDayInfo(day);
-        System.out.println("Day Info : " + dayInfo);
-        System.out.println("Order info = " + orders);
         List<Order> orderInfo = foodService.setOrderInfo(orders);
         List<Benefit> benefitInfo = benefitService.getBenefitInfo(dayInfo, orderInfo);
         Badge badgeInfo = benefitService.getBadge(orderInfo);
