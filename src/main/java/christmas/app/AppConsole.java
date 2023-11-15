@@ -40,6 +40,7 @@ public class AppConsole {
                 List<String> menuName = inputValidator.validateInputInMenu(menuInfo, parsedInput.get(0));
                 List<Integer> menuQuantity = inputValidator.validateQuantityMatchWithForm(parsedInput.get(1));
                 inputValidator.validateTotalQuantity(menuQuantity);
+                inputValidator.validateOnlyBeverage(menuInfo, menuName);
                 return inputValidator.validateUniqueMenu(menuName, menuQuantity);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
