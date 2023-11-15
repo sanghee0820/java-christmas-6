@@ -20,7 +20,7 @@ public class OutputView {
     }
 
     private String orderResult(HashMap<String, Integer> orderInfo) {
-        StringBuilder order = new StringBuilder("<주문메뉴>\n");
+        StringBuilder order = new StringBuilder("<주문 메뉴>\n");
         for (String key : orderInfo.keySet()) {
             order.append(key).append(" ").append(orderInfo.get(key)).append("개\n");
         }
@@ -72,7 +72,7 @@ public class OutputView {
         if (isGifted) {
             totalBenefit -= 25000;
         }
-        priceBenefit.append("<할인 후 예상 결제 금액>\n").append(decimalFormat.format(totalPrice - totalBenefit)).append("\n");
+        priceBenefit.append("<할인 후 예상 결제 금액>\n").append(decimalFormat.format(totalPrice - totalBenefit)).append("원\n");
         return priceBenefit.toString();
     }
 
